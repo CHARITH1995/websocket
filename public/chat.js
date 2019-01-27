@@ -16,16 +16,15 @@ btn.addEventListener('click', function(){
     message.value = "";
 });
 
-message.addEventListener('keypress', function(){
-    socket.emit('typing', handle.value);
-})
-
 // Listen for events
 socket.on('chat', function(data){
     feedback.innerHTML = '';//when stop writting
     output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>';
 });
 
+message.addEventListener('keypress', function(){
+    socket.emit('typing', handle.value);
+})
 socket.on('typing', function(data){
     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
 });
